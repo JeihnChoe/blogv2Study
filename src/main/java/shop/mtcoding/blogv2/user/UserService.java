@@ -1,6 +1,5 @@
 package shop.mtcoding.blogv2.user;
 
-import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop.mtcoding.blogv2.user.UserRequest.JoinDTO;
@@ -12,7 +11,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public void 회원가입(JoinDTO joinDTO) {
-
+        System.out.println("테스트 : 2");
         User user = User.builder()
                 .username(joinDTO.getUsername())
                 .password(joinDTO.getPassword())
@@ -20,5 +19,12 @@ public class UserService {
                 .build();
 
         userRepository.save(user);
+        System.out.println("테스트 : 3");
+    }
+
+
+    public void 로그인() {
+
+
     }
 }

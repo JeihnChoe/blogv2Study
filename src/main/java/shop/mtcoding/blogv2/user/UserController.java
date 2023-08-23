@@ -13,26 +13,35 @@ public class UserController {
 
 
     @GetMapping("/joinForm")
-    public String joinForm(){
+    public String joinForm() {
         return "/user/joinForm";
     }
 
-    @GetMapping("/loginForm"){
-    public String loginForm(){
-            return "/user/loginForm";
-        }
-    }
-
-        @PostMapping("/join")
-        public String join(UserRequest.JoinDTO joinDTO){
+    @PostMapping("/join")
+    public String join(UserRequest.JoinDTO joinDTO) {
 //        1. 값 받아오기 //  joinDTO
-//        2. 유효성검사
-//
-//        3. 권한검사
-//
-//        4. 핵심로직 호출
+//        2. 핵심로직 호출
+        try {
             userService.회원가입(joinDTO);
+        } catch (Exception e) {
+            return "redirect:/loginForm";
+        }
 
-        return "redirect:/loginForm";
+        System.out.println("테스트 : 1");
+        return "/loginForm";
     }
+
+    @GetMapping("/loginForm")
+    public String loginForm() {
+        return "/user/loginForm";
+    }
+
+    @PostMapping("/login")
+    public String login() {
+
+
+        return "redirect:/";
+    }
+
+
 }
