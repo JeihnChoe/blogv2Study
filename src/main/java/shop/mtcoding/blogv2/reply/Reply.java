@@ -1,21 +1,17 @@
 package shop.mtcoding.blogv2.reply;
 
-import java.sql.Timestamp;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import shop.mtcoding.blogv2.board.Board;
 import shop.mtcoding.blogv2.user.User;
 
+import javax.persistence.*;
+import java.sql.Timestamp;
+
+@NoArgsConstructor
 @Setter
 @Getter
 @Table(name = "reply_tb")
@@ -35,5 +31,15 @@ public class Reply {
     @ManyToOne
     private Board board;
 
+    @CreationTimestamp
     private Timestamp createdAt;
+
+    @Builder
+    public Reply(Integer id, String comment, User user, Board board, Timestamp createdAt) {
+        this.id = id;
+        this.comment = comment;
+        this.user = user;
+        this.board = board;
+        this.createdAt = createdAt;
+    }
 }

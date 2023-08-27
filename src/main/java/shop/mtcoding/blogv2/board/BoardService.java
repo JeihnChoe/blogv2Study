@@ -2,6 +2,7 @@ package shop.mtcoding.blogv2.board;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import shop.mtcoding.blogv2.user.User;
 
 import javax.transaction.Transactional;
 
@@ -12,14 +13,15 @@ public class BoardService {
     private BoardRepository boardRepository;
 
     @Transactional
-    public void 글쓰기(BoardRequest.SaveDTO saveDTO) {
+    public void 글쓰기(BoardRequest.SaveDTO saveDTO, int sessionUserId) {
 
-        Board board = new Board();
-        board.setTitle("제목6");
-        board.setContent("내용6");
+        Board board = Board.builder()
+                .title(saveDTO.getTitle())
+                .content(saveDTO.getContent())
+                .user(User.builder().id(sessionUserId).build())
+                .build();
 
         boardRepository.save(board);
-
 
     }
 }

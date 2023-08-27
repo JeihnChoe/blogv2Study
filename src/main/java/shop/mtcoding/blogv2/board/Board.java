@@ -1,12 +1,16 @@
 package shop.mtcoding.blogv2.board;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import shop.mtcoding.blogv2.user.User;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+@NoArgsConstructor
 @Setter
 @Getter
 @Table(name = "board_tb")
@@ -24,5 +28,15 @@ public class Board {
     @ManyToOne
     private User user;
 
+    @CreationTimestamp
     private Timestamp createdAt;
+
+    @Builder
+    public Board(Integer id, String title, String content, User user, Timestamp createdAt) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.user = user;
+        this.createdAt = createdAt;
+    }
 }
